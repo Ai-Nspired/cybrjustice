@@ -1,160 +1,303 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CybrJustice | Decentralized Legal Resistance</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CybrJustice | Decentralized Legal Resistance</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Custom styles for modal and onboarding -->
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background-color: #0a0a0a;
+            color: #f0f0f0;
+        }
+        .gradient-text {
+            background: linear-gradient(90deg, #ff4d4d, #f9cb28);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(255, 77, 77, 0.2);
+        }
+        .speakeasy-btn {
+            position: relative;
+            overflow: hidden;
+        }
+        .speakeasy-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+        .speakeasy-btn:hover::before {
+            left: 100%;
+        }
+    </style>
 </head>
-<body>
-<!-- onboard guide -->
-<div class="editing-guide">
-  <h3>Welcome Guide</h3>
-  <p>Use the truth-engine to discover anything</p>
-  <ul>
-    <li><strong>quick start:</strong>search: cbrj-quick start</li>    
-  </ul>
-  <button onclick="this.parentNode.style.display='none'">Got it</button>
-</div>
-
-  <div class="app-container">
-    <header>
-      <div class="nav-container">
-        <div class="logo">CybrJustice</div>
-        <nav class="nav-links">
-          <a href="#" class="nav-link" data-search="about the justice network">About</a>
-          <a href="#" class="nav-link" data-search="join the resistance network">Network</a>
-          <a href="#" class="nav-link" data-search="legal resources">Resources</a>
-          <a href="#" class="nav-link" data-search="contact truth network">Contact</a>
-        </nav>
-      </div>
-    </header>
-
-    <main>
-      <section class="hero">
-        <div class="hero-content">
-          <h1 class="hero-title">The People's Legal Resistance</h1>
-          <p class="hero-subtitle">Knowledge as defense. Community as counsel. A system that doesn't beg for change—it creates it.</p>
-          <form class="signup-form" action="https://cybrjustice.gumroad.com/" method="get" target="_blank">
-            <button type="submit" class="subscribe-btn">Join the Network</button>
-          </form>
+<body class="bg-black text-white min-h-screen">
+    <!-- Navigation -->
+    <nav class="border-b border-gray-800 py-4 px-6 md:px-12">
+        <div class="flex justify-between items-center">
+            <div class="text-2xl font-bold gradient-text">CYBRJUSTICE</div>
+            <div class="hidden md:flex space-x-8">
+                <a href="#" class="hover:text-yellow-400 transition nav-link" data-search="mission">Mission</a>
+                <a href="#" class="hover:text-yellow-400 transition nav-link" data-search="tools">Tools</a>
+                <a href="#" class="hover:text-yellow-400 transition nav-link" data-search="speakeasy">Speakeasy</a>
+                <a href="#" class="hover:text-yellow-400 transition nav-link" data-search="zines">Zines</a>
+            </div>
+            <button class="md:hidden text-xl" id="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
-      </section>
+        <!-- Mobile Nav -->
+        <div class="hidden flex-col absolute top-16 right-6 bg-black p-4 rounded border border-gray-800 space-y-3 z-50" id="mobile-menu">
+            <a href="#" class="hover:text-yellow-400 transition nav-link" data-search="mission">Mission</a>
+            <a href="#" class="hover:text-yellow-400 transition nav-link" data-search="tools">Tools</a>
+            <a href="#" class="hover:text-yellow-400 transition nav-link" data-search="speakeasy">Speakeasy</a>
+            <a href="#" class="hover:text-yellow-400 transition nav-link" data-search="zines">Zines</a>
+        </div>
+    </nav>
 
-      <section class="mission">
-        <h2 class="section-title">Our Mission</h2>
-        <p class="mission-statement">
-          We don't reform cages—we dismantle systems that make them possible. 
-          CybrJustice fuses legal wisdom, cultural defiance, and community-led action 
-          into a people-powered system built differently. Built together.
+    <!-- Hero Section -->
+    <section class="py-16 px-6 md:px-12 text-center">
+        <h1 class="text-4xl md:text-6xl font-bold mb-6">
+            <span class="gradient-text">The People's</span> Legal Resistance
+        </h1>
+        <p class="text-xl md:text-2xl max-w-3xl mx-auto mb-10">
+            Knowledge as defense. Community as counsel. A system that doesn't beg for change—it creates it.
         </p>
-        
-        <div class="features-grid">
-          <div class="feature-card">
-            <div class="feature-icon">🔑</div>
-            <h3 class="feature-title">Community Legal Support</h3>
-            <p class="feature-desc">Speakeasy-style mutual aid where knowledge is defense and neighbors are counsel.</p>
-          </div>
-          <div class="feature-card">
-            <div class="feature-icon">💼</div>
-            <h3 class="feature-title">Legal Templates</h3>
-            <p class="feature-desc">Court-ready document templates, guides, and witness affidavits.</p>
-          </div>
-          <div class="feature-card">
-            <div class="feature-icon">🎨</div>
-            <h3 class="feature-title">Liberation Art</h3>
-            <p class="feature-desc">Radical storytelling, satire, and culture jamming as resistance.</p>
-          </div>
-          <div class="feature-card">
-            <div class="feature-icon">🧬</div>
-            <h3 class="feature-title">Solidarity Network</h3>
-            <p class="feature-desc">Inside-outside support built on earned trust and direct action.</p>
-          </div>
-          <div class="feature-card">
-            <div class="feature-icon">🛠️</div>
-            <h3 class="feature-title">Power-Mapping</h3>
-            <p class="feature-desc">Street-smart tools to navigate and disrupt oppressive systems.</p>
-          </div>
-          <div class="feature-card">
-            <div class="feature-icon">🔍</div>
-            <h3 class="feature-title">Transparency Tools</h3>
-            <p class="feature-desc">Corruption trackers, FOIA toolkits, and ethics alert systems.</p>
-          </div>
+        <div class="flex flex-col md:flex-row justify-center gap-4">
+            <button class="bg-red-600 hover:bg-red-700 text-white py-3 px-8 rounded-full font-bold transition speakeasy-btn" data-search="join the speakeasy">
+                Join the Speakeasy
+            </button>
+            <button class="border border-yellow-400 hover:bg-yellow-400 hover:text-black text-yellow-400 py-3 px-8 rounded-full font-bold transition" data-search="explore tools">
+                Explore Tools
+            </button>
         </div>
-        
-        <div class="quote-section">
-          <p class="quote-text">"You don't need bars and a yard to be in a prison. We built a key."</p>
-          <p class="quote-author">— dno</p>
-        </div>
-      </section>
+    </section>
 
-      <section class="cta-section">
-        <h2 class="cta-title">Join the Speakeasy</h2>
-        <p class="cta-subtitle">This isn't a service. This is a system. Your buy-in is consideration—your ticket into the network and your agreement to hold the line.</p>
-        
-        <div class="membership-card">
-          <div class="membership-header">
-            <h3>Speakeasy Network Access</h3>
-            <p>All tiers unlock full network privileges</p>
-          </div>
-          
-          <div class="membership-options">
-            <div class="membership-option">$11</div>
-            <div class="membership-option">$22</div>
-            <div class="membership-option">$33</div>
-          </div>
-          
-          <div class="membership-features">
-            <div class="membership-feature">Full access to tools, zines, and encrypted networks</div>
-            <div class="membership-feature">Inmate-facing versions and commissary contributions</div>
-            <div class="membership-feature">Public recognition in the Ring of Support (or remain anonymous)</div>
-            <div class="membership-feature">Inside-outside communication channels</div>
-            <div class="membership-feature">Community defense resources and training</div>
-          </div>
+    <!-- Mission Section -->
+    <section class="py-16 px-6 md:px-12 bg-gray-900">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold mb-8 text-center gradient-text">Our Mission</h2>
+            <p class="text-lg md:text-xl text-center mb-12">
+                We don't reform cages—we dismantle systems that make them possible. CybrJustice fuses legal wisdom, cultural defiance, and community-led action into a people-powered system built differently. Built together.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-gray-800 p-6 rounded-lg card-hover">
+                    <div class="text-yellow-400 text-3xl mb-4">
+                        <i class="fas fa-key"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Community Legal Support</h3>
+                    <p>Speakeasy-style mutual aid where knowledge is defense and neighbors are counsel.</p>
+                </div>
+                <div class="bg-gray-800 p-6 rounded-lg card-hover">
+                    <div class="text-yellow-400 text-3xl mb-4">
+                        <i class="fas fa-file-contract"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Legal Templates</h3>
+                    <p>Court-ready document templates, guides, and witness affidavits.</p>
+                </div>
+                <div class="bg-gray-800 p-6 rounded-lg card-hover">
+                    <div class="text-yellow-400 text-3xl mb-4">
+                        <i class="fas fa-paint-brush"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Liberation Art</h3>
+                    <p>Radical storytelling, satire, and culture jamming as resistance.</p>
+                </div>
+                <div class="bg-gray-800 p-6 rounded-lg card-hover">
+                    <div class="text-yellow-400 text-3xl mb-4">
+                        <i class="fas fa-hands-helping"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Solidarity Network</h3>
+                    <p>Inside-outside support built on earned trust and direct action.</p>
+                </div>
+                <div class="bg-gray-800 p-6 rounded-lg card-hover">
+                    <div class="text-yellow-400 text-3xl mb-4">
+                        <i class="fas fa-map-marked-alt"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Power-Mapping</h3>
+                    <p>Street-smart tools to navigate and disrupt oppressive systems.</p>
+                </div>
+                <div class="bg-gray-800 p-6 rounded-lg card-hover">
+                    <div class="text-yellow-400 text-3xl mb-4">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Transparency Tools</h3>
+                    <p>Corruption trackers, FOIA toolkits, and ethics alert systems.</p>
+                </div>
+            </div>
         </div>
-        
-        <div class="cta-buttons">
-          <a href="#" class="btn btn-primary" data-search="membership options">Claim Your Tier</a>
-          <a href="#" class="btn btn-outline" data-search="network principles">Network Principles</a>
-        </div>
-        
-        <div class="issue-card">
-          <h3 class="issue-title">ISSUE 001 — à la carte $3</h3>
-          <p class="issue-desc">The beginning of the end of business as usual.</p>
-          
-          <div class="membership-features">
-            <div class="membership-feature">Coloring pages from "Tongue Punch Your Fart Box"</div>
-            <div class="membership-feature">"How to Sue the Tow Company" guide</div>
-            <div class="membership-feature">First appearance of AL Adams</div>
-            <div class="membership-feature">Civil resistance starter pack</div>
-          </div>
-        </div>
-      </section>
-    </main>
+    </section>
 
-    <footer>
-      <div class="footer-content">
-        <div class="footer-logo">CybrJustice</div>
-        
-        <div class="footer-links">
-          <a href="#" class="footer-link" data-search="cbrj about us">About</a>
-          <a href="#" class="footer-link" data-search="cbrj privacy">Privacy</a>
-          <a href="#" class="footer-link" data-search="cbrj terms">Terms</a>
-          <a href="#" class="footer-link" data-search="cbrj support">Support</a>
+    <!-- Quote Section -->
+    <section class="py-20 px-6 md:px-12 bg-black text-center">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-4xl md:text-5xl font-bold mb-6 gradient-text">
+                "You don't need bars and a yard to be in a prison. We built a key."
+            </div>
+            <div class="text-gray-400 text-lg">
+                — CybrJustice Collective
+            </div>
         </div>
-        
-        <div class="footer-meta">
-          truth-engine powered by ai-n | © 2025 CybrJustice Collective
+    </section>
+
+    <!-- Speakeasy Section -->
+    <section class="py-16 px-6 md:px-12 bg-gray-900">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4 text-center gradient-text">Join the Speakeasy</h2>
+            <p class="text-lg text-center mb-12">
+                This isn't a service. This is a system. Your buy-in is consideration—your ticket into the network and your agreement to hold the line.
+            </p>
+            <!-- Tiers -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+                <div class="bg-gray-800 p-8 rounded-lg border-2 border-yellow-400 card-hover">
+                    <div class="text-4xl font-bold gradient-text mb-4">$11</div>
+                    <ul class="space-y-3 mb-6">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-yellow-400 mt-1 mr-2"></i>
+                            <span>Full access to tools, zines, and encrypted networks</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-yellow-400 mt-1 mr-2"></i>
+                            <span>Community defense resources and training</span>
+                        </li>
+                    </ul>
+                    <button class="w-full bg-yellow-400 hover:bg-yellow-500 text-black py-3 rounded-full font-bold transition">
+                        Select Tier
+                    </button>
+                </div>
+                <div class="bg-gray-800 p-8 rounded-lg border-2 border-red-500 card-hover transform scale-105">
+                    <div class="text-4xl font-bold gradient-text mb-4">$22</div>
+                    <ul class="space-y-3 mb-6">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-yellow-400 mt-1 mr-2"></i>
+                            <span>Everything in $11 tier</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-yellow-400 mt-1 mr-2"></i>
+                            <span>Inmate-facing versions and commissary contributions</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-yellow-400 mt-1 mr-2"></i>
+                            <span>Inside-outside communication channels</span>
+                        </li>
+                    </ul>
+                    <button class="w-full bg-red-500 hover:bg-red-600 text-white py-3 rounded-full font-bold transition">
+                        Select Tier
+                    </button>
+                </div>
+                <div class="bg-gray-800 p-8 rounded-lg border-2 border-purple-500 card-hover">
+                    <div class="text-4xl font-bold gradient-text mb-4">$33</div>
+                    <ul class="space-y-3 mb-6">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-yellow-400 mt-1 mr-2"></i>
+                            <span>Everything in $22 tier</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-yellow-400 mt-1 mr-2"></i>
+                            <span>Public recognition in the Ring of Support (or remain anonymous)</span>
+                        </li>
+                    </ul>
+                    <button class="w-full bg-purple-500 hover:bg-purple-600 text-white py-3 rounded-full font-bold transition">
+                        Select Tier
+                    </button>
+                </div>
+            </div>
+            <!-- Issue -->
+            <div class="bg-black p-8 rounded-lg border border-gray-700">
+                <h3 class="text-2xl font-bold mb-4 gradient-text">ISSUE 001 — à la carte $3</h3>
+                <p class="text-lg mb-6">The beginning of the end of business as usual.</p>
+                <ul class="space-y-3 mb-6">
+                    <li class="flex items-start">
+                        <i class="fas fa-star text-yellow-400 mt-1 mr-2"></i>
+                        <span>Coloring pages from "Tongue Punch Your Fart Box"</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-star text-yellow-400 mt-1 mr-2"></i>
+                        <span>"How to Sue the Tow Company" guide</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-star text-yellow-400 mt-1 mr-2"></i>
+                        <span>First appearance of AL Adams</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-star text-yellow-400 mt-1 mr-2"></i>
+                        <span>Civil resistance starter pack</span>
+                    </li>
+                </ul>
+                <button class="bg-gray-700 hover:bg-gray-600 text-white py-3 px-6 rounded-full font-bold transition">
+                    Get Issue 001
+                </button>
+            </div>
         </div>
-      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-6 md:px-12 bg-black border-t border-gray-800">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div>
+                <div class="text-2xl font-bold gradient-text mb-4">CYBRJUSTICE</div>
+                <p class="text-gray-400">Decentralized Legal Resistance</p>
+            </div>
+            <div>
+                <h3 class="text-lg font-bold mb-4">Resources</h3>
+                <ul class="space-y-2">
+                    <li><a href="#" class="text-gray-400 hover:text-yellow-400 transition nav-link" data-search="legal templates">Legal Templates</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-yellow-400 transition nav-link" data-search="guides">Guides</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-yellow-400 transition nav-link" data-search="zines">Zines</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-lg font-bold mb-4">Community</h3>
+                <ul class="space-y-2">
+                    <li><a href="#" class="text-gray-400 hover:text-yellow-400 transition nav-link" data-search="speakeasy">Speakeasy</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-yellow-400 transition nav-link" data-search="solidarity network">Solidarity Network</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-yellow-400 transition nav-link" data-search="contribute">Contribute</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-lg font-bold mb-4">Connect</h3>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-gray-400 hover:text-yellow-400 text-xl transition">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-yellow-400 text-xl transition">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-yellow-400 text-xl transition">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-6xl mx-auto mt-12 pt-6 border-t border-gray-800 text-center text-gray-500">
+            <p>© 2025 CybrJustice Collective. All tools for the people.</p>
+        </div>
     </footer>
 
-    <div class="rabbit-btn" id="truth-engine-trigger">
-      🐇
+    <!-- White Rabbit Button -->
+    <div class="rabbit-btn fixed bottom-12 right-12 w-16 h-16 rounded-full bg-white flex items-center justify-center text-3xl z-50 cursor-pointer shadow-lg" id="truth-engine-trigger" title="Ask the Truth Engine">
+        🐇
     </div>
 
+    <!-- Modal Overlay for Truth Engine -->
     <div class="modal-overlay" id="modal-overlay">
       <div class="modal-container">
         <div class="modal-header">
@@ -171,6 +314,7 @@
       </div>
     </div>
 
+    <!-- Onboarding Overlay -->
     <div class="onboarding-overlay" id="onboardingOverlay">
       <div class="onboarding-content">
         <button class="close-onboarding" id="closeOnboarding">×</button>
@@ -178,7 +322,7 @@
         <div class="onboarding-steps">
           <div class="step">
             <h4>Navigation</h4>
-            <p>links trigger pre-defined queries</p>
+            <p>Links trigger pre-defined queries</p>
           </div>
           <div class="step">
             <h4>Truth Engine</h4>
@@ -192,10 +336,17 @@
         <button class="start-using">Begin</button>
       </div>
     </div>
-  </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-  <script src="script.js"></script>
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="script.js"></script>
+    <script>
+    // Simple mobile menu toggle
+    document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+        const menu = document.getElementById('mobile-menu');
+        menu.classList.toggle('hidden');
+        menu.classList.toggle('flex');
+    });
+    </script>
 </body>
 </html>
-
