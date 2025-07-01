@@ -31,14 +31,12 @@ function closeModalHandler() {
 async function performTruthQuery() {
   const query = queryInput.value.trim();
   resultContainer.innerHTML = '<div class="search-loading">Searching justice databases...</div>';
-  
   try {
     const response = await fetch(`${API_BASE}/api/ai/truth`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ query }),
     });
-    
     const data = await response.json();
     displayResults(data);
   } catch (error) {
@@ -49,7 +47,6 @@ async function performTruthQuery() {
 function displayResults(data) {
   let html = `<div class="result-content">`;
   html += `<div class="answer">${marked.parse(data.answer)}</div>`;
-  
   if (data.citations?.length) {
     html += `<div class="citations"><h4>Sources:</h4><ul>`;
     data.citations.forEach(citation => {
@@ -57,7 +54,6 @@ function displayResults(data) {
     });
     html += `</ul></div>`;
   }
-  
   resultContainer.innerHTML = html + `</div>`;
 }
 
@@ -65,7 +61,6 @@ function displayResults(data) {
 function showOnboarding() {
   onboardingOverlay.classList.add('active');
 }
-
 function hideOnboarding() {
   onboardingOverlay.classList.remove('active');
 }
@@ -76,27 +71,9 @@ closeModal.addEventListener('click', closeModalHandler);
 modalOverlay.addEventListener('click', (e) => {
   if (e.target === modalOverlay) closeModalHandler();
 });
-
 searchButton.addEventListener('click', performTruthQuery);
 queryInput.addEventListener('keypress', (e) => {
   if (e.key === 'Enter') performTruthQuery();
-});
-
-// Link Handling
-document.querySelectorAll('[data-search]').forEach(link => {
-  link.addEventListener('click', (e) => {
-    e.preventDefault();
-    const searchTerm = link.getAttribute('data-search');
-    
-    // Visual feedback
-    link.classList.add('active-search');
-    setTimeout(() => link.classList.remove('active-search'), 500);
-    
-    // Open and search
-    if (!modalOverlay.classList.contains('active')) openModal();
-    queryInput.value = searchTerm;
-    setTimeout(() => searchButton.click(), 300);
-  });
 });
 
 // Onboarding
@@ -104,7 +81,24 @@ if (!localStorage.getItem('onboardingShown')) {
   setTimeout(showOnboarding, 1500);
   localStorage.setItem('onboardingShown', 'true');
 }
-
 closeOnboarding.addEventListener('click', hideOnboarding);
 startUsingBtn.addEventListener('click', hideOnboarding);
 
+// Existing data-search links in nav, hero, etc.
+document.querySelectorAll('[data-search]').forEach(link => {
+  link.addEventListener('click', (e) => {
+    e.preventDefault();
+    const searchTerm = link.getAttribute('data-search');
+    // Visual feedback
+    link.classList.add('active-search');
+    setTimeout(() => link.classList.remove('active-search'), 500);
+    // Open and search
+    if (!modalOverlay.classList.contains('active')) openModal();
+    queryInput.value = searchTerm;
+    setTimeout(() => searchButton.click(), 300);
+  });
+});
+
+// Expose modal/query for inline script
+window.openModal = openModal;
+window.performTruthQuery = performTruthQuery;
