@@ -348,5 +348,50 @@
         menu.classList.toggle('flex');
     });
     </script>
+    <!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script src="script.js"></script>
+<script>
+  // Simple mobile menu toggle
+  document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+      const menu = document.getElementById('mobile-menu');
+      menu.classList.toggle('hidden');
+      menu.classList.toggle('flex');
+  });
+</script>
+<!-- Universal modal & query handler -->
+<script>
+  window.addEventListener('DOMContentLoaded', () => {
+    const modalOverlay = document.getElementById('modal-overlay');
+    const queryInput = document.getElementById('queryInput');
+    const resultContainer = document.getElementById('resultContainer');
+    // If there's a ?q=... on page load, run a query
+    const params = new URLSearchParams(window.location.search);
+    const q = params.get('q');
+    if (q) {
+      if (!modalOverlay.classList.contains('active')) openModal();
+      queryInput.value = q;
+      performTruthQuery();
+    }
+    // Intercept ?q=... links in the modal/results area
+    resultContainer.addEventListener('click', function(event) {
+      const link = event.target.closest('a[href]');
+      if (!link) return;
+      const url = new URL(link.href, window.location.origin);
+      const isSamePage = url.origin === window.location.origin && url.pathname === window.location.pathname;
+      if (isSamePage && url.searchParams.has('q')) {
+        event.preventDefault();
+        const query = url.searchParams.get('q');
+        if (query) {
+          if (!modalOverlay.classList.contains('active')) openModal();
+          queryInput.value = query;
+          performTruthQuery();
+          // Optionally update address bar:
+          // history.replaceState(null, '', url.search);
+        }
+      }
+    });
+  });
+</script>
 </body>
 </html>
